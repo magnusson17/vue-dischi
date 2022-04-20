@@ -1,14 +1,25 @@
 <template>
   <div>
-    main
+    <MainCompSon
+        v-for="(element, index) in salvoArrayAxios"
+        :key="index"
+        :poster="element.poster"
+        :title="element.title"
+        :author="element.author"
+        :year="element.year"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import MainCompSon from './MainCompSon.vue';
 
 export default {
     name: 'MainComp',
+    components: {
+        MainCompSon,
+    },
 
     data() {
         return {

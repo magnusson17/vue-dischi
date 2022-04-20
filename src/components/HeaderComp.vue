@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fs-2">
     img
   </div>
 </template>
