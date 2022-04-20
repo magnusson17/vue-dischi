@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div id="first_div">
     <HeaderComp/>
-    <MainComp/>
+    <div class="container d-flex justify-content-center py-5">
+      <MainComp/>
+    </div>
   </div>
 </template>
 
@@ -22,5 +24,9 @@ export default {
 
 <style lang="scss">
 @import "bootstrap/dist/css/bootstrap.min.css";
+
+#first_div {
+  background-color: #1E2D3B;
+}
 
 </style>
