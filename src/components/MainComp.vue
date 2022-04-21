@@ -1,5 +1,7 @@
 <template>
   <div id="MainComp_div" class="row row-cols-6 justify-content-center">
+    <HeaderCompSelect @funzioneGenere="metodoTrovaGenere"/>
+
     <MainCompSon
         v-for="(element, index) in salvoArrayAxios"
         :key="index"
@@ -13,11 +15,13 @@
 
 <script>
 import axios from 'axios';
+import HeaderCompSelect from './HeaderCompSelect.vue';
 import MainCompSon from './MainCompSon.vue';
 
 export default {
     name: 'MainComp',
     components: {
+        HeaderCompSelect,
         MainCompSon,
     },
 

@@ -1,6 +1,9 @@
 <template>
   <div id="first_div">
-    <HeaderComp/>
+    <div id="header" class="p-3 d-flex justify-content-between align-items-center">
+      <HeaderComp/>
+      <HeaderCompSelect/>
+    </div>
     <div class="container d-flex justify-content-center py-5">
       <MainComp/>
     </div>
@@ -11,12 +14,14 @@
 import "bootstrap"
 
 import HeaderComp from './components/HeaderComp.vue'
+import HeaderCompSelect from './components/HeaderCompSelect.vue'
 import MainComp from './components/MainComp.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderComp,
+    HeaderCompSelect,
     MainComp
   }
 }
@@ -27,6 +32,10 @@ export default {
 
 #first_div {
   background-color: #1E2D3B;
+}
+
+#header {
+  background-color: #2E3A46;
 }
 
 </style>
