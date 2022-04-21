@@ -2,7 +2,7 @@
   <div id="first_div">
     <div id="header" class="p-3 d-flex justify-content-between align-items-center">
       <HeaderComp/>
-      <HeaderCompSelect/>
+      <HeaderCompSelect @funValoreFromSelect="funFromMetodoPadre"/>
     </div>
     <div class="container d-flex justify-content-center py-5">
       <MainComp/>
@@ -23,6 +23,30 @@ export default {
     HeaderComp,
     HeaderCompSelect,
     MainComp
+  },
+
+  data() {
+    return {
+      valoreSalvatoInPadre: ''
+    }
+  },
+
+  computed: {
+    funFiltraggio() {
+      if (this.valoreSalvatoInPadre == '') {
+        return this.salvoArrayAxios
+      } else {
+        return this.salvoArrayAxios.filter((item) => {
+          return item.genre.toLowerCase().includes(this.valoreSalvatoInPadre.toLowerCase());
+        })
+      }
+    }
+  },
+
+  methods: {
+    funFromMetodoPadre(genere) {
+      this.valoreSalvatoInPadre = genere;
+    }
   }
 }
 </script>
