@@ -1,16 +1,21 @@
 <template>
     <div>
+      <!-- 3.1) con v.model salvo il value delle option dentro un data, che farà da contenitore, che creo io  -->
+      <!-- 3.2) al click creo un emit che passerò al dad ('funValoreFromSelect' è la fun, valoreFromSelect è il data contenitore dentro il quale ho salvato il value), ora torno sul dad -->
       <select 
+        v-model="valoreFromSelect"
+        @change="$emit('funValoreFromSelect', valoreFromSelect)"
         name="select_genre" 
         id="select_genre" 
-        class="p-2" 
-        v-model="valoreFromSelect"
-        @click="$emit('funValoreFromSelect', valoreFromSelect)">
+        class="p-2">
         <option value="" disabled selected>Scegli un genere</option>
-        <option value="Rock">Rock</option>
-        <option value="Pop">Pop</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Metal">Metal</option>
+        <option value="">Tutti i generi</option>
+        <!-- 2) ciclo l'array che contiene i props (ogni element contiene un genere) -->
+        <option 
+          v-for="(element, index) in propsPassoGeneriASecondSon" 
+          :key="index"
+          :value="element">{{element}}
+        </option>
       </select>
     </div>
 </template>
@@ -18,9 +23,14 @@
 <script>
 export default {
     name: 'HeaderCompSelect',
+    // 1) devo inserire i promps che mi arrivano dal dad
+    props: {
+      propsPassoGeneriASecondSon: Array,
+    },
 
     data() {
         return {
+          // 3.1) salvo il value selezionato dentro un mio data
             valoreFromSelect: '',
         }
     }

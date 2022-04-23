@@ -2,10 +2,20 @@
   <div id="first_div">
     <div id="header" class="p-3 d-flex justify-content-between align-items-center">
       <HeaderComp/>
-      <HeaderCompSelect @funValoreFromSelect="funFromMetodoPadre"/>
+      <!-- 3) ora devo passare al son2, quindi faccio un promp: propsPassoGeneriASecondSon è il nome del promp, generi è il dato che voglio passare. Quindi ora vado sul son2 (HeaderCompSelect.vue)  -->
+
+      <!-- 4) ricevo l'emit funValoreFromSelect da son2 e, da quello, creo un metodo proprio del dad: funSelectMetodoPadre -->
+      <HeaderCompSelect 
+        :propsPassoGeneriASecondSon="generi"
+        @funValoreFromSelect="funSelectMetodoPadre"/>
     </div>
     <div class="container d-flex justify-content-center py-5">
-      <MainComp/>
+      <!-- 1) richiamo la fun che ho creato in son1 con l'emit e la trasformo in una nuova fun questa volta "prorpria" del dad, che sara usata appunto nei methods del dad -->
+
+      <!-- 5) ora passo valoreSalvatoInPadre a son1 con un props, quindi vado in son1 (MainComp.vue) -->
+      <MainComp
+        @spostoGeneriSonToDad="lavoroGeneriInDadFun"
+        :propsPassoGeneriAFirstSon="valoreSalvatoInPadre"/>
     </div>
   </div>
 </template>
@@ -27,25 +37,23 @@ export default {
 
   data() {
     return {
-      valoreSalvatoInPadre: ''
-    }
-  },
-
-  computed: {
-    funFiltraggio() {
-      if (this.valoreSalvatoInPadre == '') {
-        return this.salvoArrayAxios
-      } else {
-        return this.salvoArrayAxios.filter((item) => {
-          return item.genre.toLowerCase().includes(this.valoreSalvatoInPadre.toLowerCase());
-        })
-      }
+      // 4)
+      valoreSalvatoInPadre: '',
+      // 2) creo un array proprio del dad per contenere i generi
+      generi: []
     }
   },
 
   methods: {
-    funFromMetodoPadre(genere) {
-      this.valoreSalvatoInPadre = genere;
+    // 2) salvo i generi dall'array di son1 nel array di dad(il paramentro di questa fun fa riferimento al dato this.salvoGeneri in son1)
+    lavoroGeneriInDadFun(thisSalvoGeneri) {
+      // in pratica gli dico: generi[] (del dad) = generi[] (del son)
+      this.generi = thisSalvoGeneri;
+    },
+
+    // 4)
+    funSelectMetodoPadre(valoreFromSelect) {
+      this.valoreSalvatoInPadre = valoreFromSelect
     }
   }
 }
